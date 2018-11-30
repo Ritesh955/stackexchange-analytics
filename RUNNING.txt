@@ -1,0 +1,88 @@
+Folder "ETL" contains all the ETL work done for exploratory analytics on stackechange data
+	
+	Since the data was available in XML there was no inbuilt spark read api to read XML format, we converted it 
+	to csv. However, due to technical difficulty we faced we decided to resorted to parquet format as we saw 
+	many advantages with it.
+
+	ETL/xml_to_csv.py
+	?????????????????????????????????????????????????
+
+	ETL/xml_to_parquet.py
+	
+		1) manually creare folder called parquet
+		2) python xml_to_csv.py /user/cmandava/Tags ./parquet/ Tags
+
+	ETL/data_loader.py
+
+	    1) spark-submit --packages datastax:spark-cassandra-connector:2.3.1-s_2.11 data_loader.py /user/cmandava/Tags_parquet/ stackexchange Tags
+
+	 ETL/rename.py
+
+	 	1) python rename.py
+
+Folder "Analytics" contains all the queries done for exploratory analytics on stackechange table
+
+	Analytics/comments_analytics
+
+		1) module load spark
+
+		2) Firstly install textblob  using
+			 pip3 install --user --force-reinstall --ignore-installed textblob
+
+		3) Make sure that directory is readable by the executor processes (that aren't running as your userid):
+			 chmod 0711 ~ ~/.local ~/.local/lib
+			 chmod 0755 ~/.local/lib/python3.5 ~/.local/lib/python3.5/site-packages
+
+		4) Run the code
+			spark-submit comments_analytics.py /user/cmandava/Comments_parquet
+
+
+	Analytics/posts_analytics
+			
+		1) Run the code
+			spark-submit posts_analytics.py /user/cmandava/Posts_parquet
+		   	
+		   	The code will output the query results in the form of dataframes they can looked for while the code is executing alternatively they are also saved as a csv file in hdfs by the names: qa_per_year, qa_per_site, avg_resp_time_days, avg_acc_ans_words, avg_num_of_ans_per_site
+
+	Analytics/users_analytics
+		1) Run the code
+			spark-submit users_analytics.py /user/cmandava/Users_parquet
+
+			The code will output the query results in the form of dataframes they can looked for while the code is executing alternatively they are also saved as a csv file in hdfs by the names: user_base,reputation_base,highest_reputation,top100_rep
+
+	Analytics/votes_analytics
+		1) Run the code
+			spark-submit votes_analytics.py /user/cmandava/Votes_parquet
+
+
+	Analytics/quick_bagdes
+		1) Run the code
+			spark-submit quick_badges.py /user/cmandava/Users_parquet /user/cmandava/Badges_parquet
+
+Folder "Machine Learning" contains tag_preditor, wordcloud and common_tags_words for stackechange data
+
+	Machine Learning/common_tags_words.py
+	???????????????????
+
+	Machine Learning/tag_predictor.py
+	??????????????????
+
+	Machine Learning/wordcloud.py
+	???????????????????
+
+
+Folder "Tableau Workbooks" contains the dashboards, one was created to observe question and answers trends while other one was created to see the stackexchange's user_base
+
+Both of these can be viewed using tableau
+   Tableau Workbooks/stack_exchange_qa_trends.twb
+   Tableau Workbooks/stack_exchange_user_base.twb
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,21 @@
+mkdir Tags Comments Posts Users Votes Badges PostLinks PostHistory
+
+#mv Tags.xml Tags_gaming.xml
+#mv Comments.xml Comments_gaming.xml
+#mv Posts.xml Posts_gaming.xml
+#mv Users.xml Users_gaming.xml
+#mv Votes.xml Votes_gaming.xml
+#mv Badges.xml Badges_gaming.xml
+#mv PostLinks.xml PostLinks_gaming.xml
+#mv PostHistory.xml PostHistory_gaming.xml
+
+cp ./*/Tags*.xml ./data/Tags/
+cp ./*/Comments*.xml ./data/Comments/
+cp ./*/Posts*.xml ./data/Posts/
+cp ./*/Users*.xml ./data/Users/
+cp ./*/Votes*.xml ./data/Votes/
+cp ./*/Badges*.xml ./data/Badges/
+cp ./*/PostLinks*.xml ./data/PostLinks/
+cp ./*/PostHistory*.xml ./data/PostHistory/
+
+mkdir Tags_csv Comments_csv Posts_csv Users_csv Votes_csv Badges_csv PostLinks_csv PostHistory_csv
